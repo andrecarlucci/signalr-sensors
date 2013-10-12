@@ -1,0 +1,5 @@
+*/bin*
+Sensors/Sensors.Web/bin/
+Sensors/Sensors.Web/obj/
+Sensors/packages/Microsoft.AspNet.SignalR.1.1.3/Microsoft.AspNet.SignalR.1.1.3.nupkg
+Sensors/packages/
