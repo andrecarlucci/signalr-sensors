@@ -38,21 +38,7 @@ $(function () {
             $clientCount.text(count);
         },
         windChanged: function(angle) {
-            if (angle < 0) {
-                starsCenter();
-            }
-            else if (angle > 315 && angle <= 45) {
-                startsRight();
-            }
-            else if (angle > 45 && angle <= 135) {
-                startsUp();
-            }
-            else if (angle > 135 && angle <= 225) {
-                startsLeft();
-            }
-            else if (angle > 225 && angle <= 315) {
-                startsDown();
-            }
+            changeDirection
         }
     });
 

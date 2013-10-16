@@ -1,25 +1,11 @@
 ﻿(function (starfield, $, undefined) {
     'use strict';
     
-    function $r(parent, child) { (document.getElementById(parent)).removeChild(document.getElementById(child)); }
-
-    function $t(name) { return document.getElementsByTagName(name); }
-
-    function $c(code) { return String.fromCharCode(code); }
-
-    function $h(value) { return ('0' + Math.max(0, Math.min(255, Math.round(value))).toString(16)).slice(-2); }
-
-    function _i(id, value) { $t('div')[id].innerHTML += value; }
-
-    function _h(value) { return !hires ? value : Math.round(value / 2); }
-
     function get_screen_size() {
         var w = document.documentElement.clientWidth;
         var h = document.documentElement.clientHeight;
         return Array(w, h);
     }
-
-    var url = document.location.href;
 
     var flag = true;
     var test = true;
@@ -35,7 +21,6 @@
     var star_speed = 4;
     var star_speed_save = 0;
     var star = new Array(n);
-    var color;
     var opacity = 0.1;
 
     var cursor_x = 0;
@@ -50,7 +35,6 @@
     var context;
 
     var key;
-    var ctrl;
 
     var timeout;
     var fps = 5;
@@ -219,8 +203,27 @@
         cursor_y = document.documentElement.clientHeight / 2;
     }
 
+    function changeDirection(angle) {
+        if (angle < 0) {
+            starsCenter();
+        }
+        else if (angle > 315 && angle <= 45) {
+            starsRight();
+        }
+        else if (angle > 45 && angle <= 135) {
+            starsUp();
+        }
+        else if (angle > 135 && angle <= 225) {
+            starsLeft();
+        }
+        else if (angle > 225 && angle <= 315) {
+            starsDown();
+        }
+    }
+
     starfield.anim = anim;
     starfield.resize = resize;
+    starfield.changeDirection = changeDirection;
 
 }(window.starfield = window.starfield || {}, jQuery));
 
