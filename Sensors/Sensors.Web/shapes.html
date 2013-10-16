@@ -2,37 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>MoveShape Web</title>
-    <style>
-        html, body {
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Segoe UI', Arial;
-        }
-
-        #shape {
-            width: 100px;
-            height: 100px;
-            background-color: #0094ff;
-            cursor: move;
-        }
-
-        #clientCount {
-            position: absolute;
-            top: 0;
-            right: 10px;
-            font-size: 72px;
-            color: #cdcdcd;
-        }
-    </style>
+    <link href="css/game.css" rel="stylesheet" />
 </head>
-<body>
-    <div id="shape"></div>
+<body onload="start()" onresize="resize()" onorientationchange="resize()">
     <div id="clientCount"></div>
-
+    <div id="boss"></div>
+    
+    <canvas id="starfield"></canvas>
+    
+    <div class="buttons">
+        <button onclick=""></button>
+        <button onclick=""></button>
+        <button onclick=""></button>
+        <button onclick=""></button>
+    </div>
     <script src="Scripts/jquery-1.6.4.js"></script>
     <script src="Scripts/jquery-ui-1.10.3.min.js"></script>
+    <script src="Scripts/jquery.ui.touch-punch.js"></script>
+    <script src="Scripts/starfield2.js"></script>
     <script src="Scripts/jquery.signalR-1.1.3.js"></script>
     <script src="./signalr/hubs"></script>
 

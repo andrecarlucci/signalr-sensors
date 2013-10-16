@@ -156,6 +156,7 @@
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
     <Content Include="Scripts\jquery.signalR-1.1.3.js" />
     <Content Include="Scripts\jquery.signalR-1.1.3.min.js" />
+    <Content Include="Scripts\jquery.ui.touch-punch.js" />
     <Content Include="Scripts\shapes.js" />
     <Content Include="Scripts\starfield.js" />
     <Content Include="shapes.html" />
@@ -169,7 +170,9 @@
     </Compile>
     <Compile Include="Hubs\Chat.cs" />
     <Compile Include="Hubs\Game.cs" />
-    <Compile Include="Hubs\Shapes.cs" />
+    <Compile Include="Hubs\Player.cs" />
+    <Compile Include="Hubs\GameHub.cs" />
+    <Compile Include="Hubs\Turn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

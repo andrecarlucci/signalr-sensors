@@ -1,10 +1,21 @@
 ﻿
-(function (starfield, $, undefined) {
+(function(starfield, $, undefined) {
     'use strict';
 
+    function moveStar($star, x, y) {
+        $star.animate({
+            left: '+=' + x,
+            top: '+=' + y
+        },100);
+    }
+
+    //$shape.css({
+    //    left: (body.clientWidth - $shape.width()) * x,
+    //    top: (body.clientHeight - $shape.height()) * y
+    //});
 
 
-}(window.starfield = window.starfield || {}, jQuery))
+}(window.starfield = window.starfield || {}, jQuery));
 
 function MoveObjNN4(obj, xPos, yPos) {
     obj.top = yPos;
@@ -145,7 +156,7 @@ function GetViewportHeight() {
 function InitGlobals() {
     totalWidth = GetViewportWidth();
     totalHeight = GetViewportHeight();
-    nStars = 200;
+    nStars = 20;
     speeds = new Array(nStars);
     stars = new Array(nStars);
     star_tops = new Array(nStars);

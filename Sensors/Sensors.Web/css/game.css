@@ -1,0 +1,55 @@
+﻿html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Arial;
+}
+
+.player {
+    width: 50px;
+    height: 50px;
+    background-color: #0094ff;
+    position: absolute;
+}
+
+.me {
+    background-color: #b0e0e6;
+    cursor: move;
+}
+
+#boss {
+    width: 50px;
+    height: 50px;
+    background-color: #a52a2a;
+    position: relative;
+}
+
+#clientCount {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 72px;
+    color: #cdcdcd;
+}
+
+canvas {
+    background-color: #FFFFFF;
+    overflow: hidden;
+    z-index: -1;
+    top: 0;
+}
+
+button {
+    width: 20px;
+    height: 20px;
+}
+
+.buttons {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+}
+
+body {
+}
