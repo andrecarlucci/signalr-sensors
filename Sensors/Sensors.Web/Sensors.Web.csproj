@@ -145,6 +145,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="css\game.css" />
     <Content Include="game.html" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
@@ -158,7 +159,9 @@
     <Content Include="Scripts\jquery.signalR-1.1.3.min.js" />
     <Content Include="Scripts\jquery.ui.touch-punch.js" />
     <Content Include="Scripts\shapes.js" />
+    <Content Include="Scripts\starfield2.js" />
     <Content Include="Scripts\starfield.js" />
+    <Content Include="sensors.html" />
     <Content Include="shapes.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
