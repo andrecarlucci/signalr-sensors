@@ -17,6 +17,11 @@ namespace Sensors.Web.Hubs {
             _game = Game.Instance;
         }
 
+        public void ChangeWind(double angle) {
+            _game.WindAngle = angle;
+            Clients.Others.windChanged(angle);
+        }
+
         public void MovePlayer(double x, double y) {
             _game.MovePlayer(Context.ConnectionId, x, y);
             Clients.Others.shapeMoved(Context.ConnectionId, x, y);

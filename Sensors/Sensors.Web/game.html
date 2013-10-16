@@ -4,7 +4,7 @@
     <title>MoveShape Web</title>
     <link href="css/game.css" rel="stylesheet" />
 </head>
-<body onload="start()" onresize="resize()" onorientationchange="resize()">
+<body onresize="resize()" onorientationchange="resize()">
     <div id="clientCount"></div>
     <div id="boss"></div>
     
@@ -24,5 +24,14 @@
     <script src="./signalr/hubs"></script>
 
     <script src="Scripts/shapes.js"></script>
+    
+    <script>
+        $(function() {
+            document.body.onresize = starfield.resize;
+            document.body.onorientationchange = starfield.resize;
+            starfield.start();
+            
+        });
+    </script>
 </body>
 </html>

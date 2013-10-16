@@ -8,22 +8,22 @@ $(function () {
         $me;
 
     $.extend(hub.client, {
-        addOtherPlayer: function (player) {
+        addOtherPlayer: function(player) {
             addPlayer(player);
         },
-        addPlayer: function (player) {
+        addPlayer: function(player) {
             addPlayer(player);
             $me = $("#" + player.Id);
             $me.addClass("me");
             addDraggable($me);
         },
-        removePlayer: function (playerId) {
+        removePlayer: function(playerId) {
             var div;
-            if(div = document.getElementById(playerId)) {
+            if (div = document.getElementById(playerId)) {
                 div.parentNode.removeChild(div);
             }
         },
-        shapeMoved: function (id, x, y) {
+        shapeMoved: function(id, x, y) {
             var $shape = $("#" + id);
             if (!$shape) {
                 return;
@@ -34,13 +34,34 @@ $(function () {
             });
             //console.log("Moved: " + $shape.attr('id') + " left: " + x + " right: " + y);
         },
-        clientCountChanged: function (count) {
+        clientCountChanged: function(count) {
             $clientCount.text(count);
+        },
+        windChanged: function(angle) {
+            if (angle < 0) {
+                starsCenter();
+            }
+            else if (angle > 315 && angle <= 45) {
+                startsRight();
+            }
+            else if (angle > 45 && angle <= 135) {
+                startsUp();
+            }
+            else if (angle > 135 && angle <= 225) {
+                startsLeft();
+            }
+            else if (angle > 225 && angle <= 315) {
+                startsDown();
+            }
         }
     });
 
     $.connection.hub.start().done(function () {
     });
+
+    function changeWind(angle) {
+        hub.server.changeWind(angle);
+    }
     
     function addPlayer(player) {
         if (document.getElementById(player.Id)) {

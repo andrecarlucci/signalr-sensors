@@ -22,6 +22,7 @@ namespace Sensors.Web.Hubs {
 
         public ConcurrentDictionary<string, Player> PlayersDic = new ConcurrentDictionary<string, Player>();
         public Player Boss { get; set; }
+        public double WindAngle { get; set; }
 
         private Timer _timer;
 
@@ -32,6 +33,9 @@ namespace Sensors.Web.Hubs {
         }
 
         private void Tick(object state) {
+            if (PlayersDic.Count == 0) {
+                return;
+            }
             var players = PlayersDic.Values.ToList();
             MoveBoss(players);
             var context = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
