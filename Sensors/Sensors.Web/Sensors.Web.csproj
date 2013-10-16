@@ -146,7 +146,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="css\game.css" />
-    <Content Include="game.html" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="packages.config" />
@@ -162,7 +161,7 @@
     <Content Include="Scripts\starfield2.js" />
     <Content Include="Scripts\starfield.js" />
     <Content Include="sensors.html" />
-    <Content Include="shapes.html" />
+    <Content Include="game.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

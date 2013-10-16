@@ -1,6 +1,4 @@
-﻿function $i(id) { return document.getElementById(id); }
-
-function $r(parent, child) { (document.getElementById(parent)).removeChild(document.getElementById(child)); }
+﻿function $r(parent, child) { (document.getElementById(parent)).removeChild(document.getElementById(child)); }
 
 function $t(name) { return document.getElementsByTagName(name); }
 
@@ -64,7 +62,7 @@ function init() {
         star[i][3] = 0;
         star[i][4] = 0;
     }
-    var starfield = $i('starfield');
+    var starfield = document.getElementById('starfield');
     starfield.style.position = 'absolute';
     starfield.width = w;
     starfield.height = h;
@@ -127,6 +125,8 @@ function move(evt) {
     evt = evt || event;
     cursor_x = evt.pageX - canvas_x;
     cursor_y = evt.pageY - canvas_y;
+    console.log(cursor_x);
+    console.log(cursor_y);
 }
 
 function key_manager(evt) {
@@ -179,8 +179,8 @@ function start() {
 }
 
 function resize() {
-    w = parseInt((url.indexOf('w=') != -1) ? url.substring(url.indexOf('w=') + 2, ((url.substring(url.indexOf('w=') + 2, url.length)).indexOf('&') != -1) ? url.indexOf('w=') + 2 + (url.substring(url.indexOf('w=') + 2, url.length)).indexOf('&') : url.length) : get_screen_size()[0]);
-    h = parseInt((url.indexOf('h=') != -1) ? url.substring(url.indexOf('h=') + 2, ((url.substring(url.indexOf('h=') + 2, url.length)).indexOf('&') != -1) ? url.indexOf('h=') + 2 + (url.substring(url.indexOf('h=') + 2, url.length)).indexOf('&') : url.length) : get_screen_size()[1]);
+    w = parseInt(get_screen_size()[0]);
+    h = parseInt(get_screen_size()[1]);
     x = Math.round(w / 2);
     y = Math.round(h / 2);
     z = (w + h) / 2;
@@ -188,6 +188,28 @@ function resize() {
     cursor_x = x;
     cursor_y = y;
     init();
+}
+
+function startsDirection(x, y) {
+    cursor_x = x;
+    cursor_y = y;
+}
+
+function starsUp() {
+    cursor_x = document.documentElement.clientWidth/2;
+    cursor_y = 0;
+}
+function starsDown() {
+    cursor_x = document.documentElement.clientWidth / 2;
+    cursor_y = document.documentElement.clientHeight;
+}
+function starsLeft() {
+    cursor_x = 0;
+    cursor_y = document.documentElement.clientHeight / 2;
+}
+function starsRight() {
+    cursor_x = document.documentElement.clientWidth;
+    cursor_y = document.documentElement.clientHeight / 2;;
 }
 
 //document.onmousemove = move;

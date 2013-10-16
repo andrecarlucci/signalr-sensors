@@ -1,29 +1,28 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
-    <script src="Scripts/jquery-1.6.4.js"></script>
-    <script src="Scripts/starfield.js"></script>
-
-    <script>
-        $(function () {
-            StartStars();
-        });
-    </script>
-
-    <style>
-        body {
-            margin: 0px;
-            background: rgb(0, 0, 0);
-        }
-        .star {
-            font: 16px Times New Roman;
-            position: absolute;
-        }
-    </style>
-
+    <title>MoveShape Web</title>
+    <link href="css/game.css" rel="stylesheet" />
 </head>
-<body>
+<body onload="start()" onresize="resize()" onorientationchange="resize()">
+    <div id="clientCount"></div>
+    <div id="boss"></div>
     
+    <canvas id="starfield"></canvas>
+    
+    <div class="buttons">
+        <button onclick="starsUp()">u</button>
+        <button onclick="starsDown()">d</button>
+        <button onclick="starsLeft()">l</button>
+        <button onclick="starsRight()">r</button>
+    </div>
+    <script src="Scripts/jquery-1.6.4.js"></script>
+    <script src="Scripts/jquery-ui-1.10.3.min.js"></script>
+    <script src="Scripts/jquery.ui.touch-punch.js"></script>
+    <script src="Scripts/starfield2.js"></script>
+    <script src="Scripts/jquery.signalR-1.1.3.js"></script>
+    <script src="./signalr/hubs"></script>
+
+    <script src="Scripts/shapes.js"></script>
 </body>
 </html>

@@ -28,7 +28,7 @@ namespace Sensors.Web.Hubs {
         private Game() {
             Boss = new Player("boss");
             Boss.Speed = 0.05;
-            _timer = new Timer(Tick, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
+            _timer = new Timer(Tick, null, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(500));
         }
 
         private void Tick(object state) {
