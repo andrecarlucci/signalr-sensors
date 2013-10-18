@@ -6,8 +6,27 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <Page.Resources>
+        <Style x:Key="Botao" TargetType="Grid">
+            <Setter Property="Background" Value="BlueViolet" />
+            <Setter Property="Width" Value="240" />
+            <Setter Property="Height" Value="240" />
+            <Setter Property="Margin" Value="40,40,0,0" />
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="Margin" Value="12" />
+        </Style>
+    </Page.Resources>
+    <GridView Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Style="{StaticResource Botao}" PointerReleased="AcelerometroClick">
+            <TextBlock>Acelerômetro</TextBlock>
+        </Grid>
+        <Grid Style="{StaticResource Botao}">
+            <TextBlock>Sensor de Luz</TextBlock>
+        </Grid>
+        <Grid Style="{StaticResource Botao}">
+            <TextBlock>Bússola</TextBlock>
+        </Grid>
+    </GridView>
 </Page>

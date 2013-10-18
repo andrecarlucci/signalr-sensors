@@ -48,8 +48,9 @@ namespace Sensors.Web.Hubs {
             Clients.Others.addOtherPlayer(player);
             Clients.Caller.addPlayer(player);
             Clients.Caller.windChanged(_game.WindAngle);
-            Clients.All.isDayChanged(_game.IsDay);
-            Clients.All.clientDeathChanged(_game.DeathCount);
+            Clients.Caller.isDayChanged(_game.IsDay);
+            Clients.Caller.clientDeathChanged(_game.DeathCount);
+            Clients.Caller.compassChanged(_game.CompassAngle);
 
             return Clients.All.clientCountChanged(_game.PlayersDic.Count);
         }

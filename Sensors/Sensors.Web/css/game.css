@@ -74,3 +74,15 @@ button {
     width: 150px;
     z-index: 99;
 }
+
+.chat {
+    z-index: 99;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    visibility: hidden;
+}
+
+#message {
+    
+}

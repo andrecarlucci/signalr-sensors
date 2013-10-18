@@ -26,5 +26,10 @@ namespace Sensors.App
         {
             this.InitializeComponent();
         }
+
+        private void AcelerometroClick(object sender, PointerRoutedEventArgs e) {
+            Frame.Navigate(typeof(GiroscopioView));
+        }
+
     }
 }

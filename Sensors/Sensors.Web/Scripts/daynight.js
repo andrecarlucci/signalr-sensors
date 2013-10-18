@@ -1,4 +1,5 @@
-﻿(function (daynight, $, undefined) {
+﻿//derived from http://tympanus.net/codrops/2009/12/14/day-and-night-creating-animation-with-jquery-and-css/
+(function (daynight, $, undefined) {
     'use strict';
 
     var isDay = true;
