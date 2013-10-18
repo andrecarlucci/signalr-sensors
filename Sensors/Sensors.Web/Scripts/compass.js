@@ -6,6 +6,7 @@
 
     compass.setAngle = function (rotationrange) {
         var angle = parseInt(rotationrange, 10);
-        $("#compass").rotate(angle);
+        $("#needle").rotate(angle);
     };
+    
 }(window.compass = window.compass || {}, jQuery));

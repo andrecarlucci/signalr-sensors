@@ -1,6 +1,6 @@
 ﻿/// <reference path="jquery.signalR-1.1.3.js" />
 /// <reference path="jquery-1.6.4.js" />
-(function (game, starfield, $, undefined) {
+(function (game, starfield, daynight, compass, $, undefined) {
     
     var hub = $.connection.gameHub,
         $boss = $("#boss"),
@@ -40,16 +40,35 @@
         clientCountChanged: function(count) {
             $clientCount.text(count);
         },
-        clientDeathChanged: function (count) {
+        clientDeathChanged: function(count) {
             $deathCount.text(count);
         },
         windChanged: function(angle) {
             starfield.changeDirection(angle);
+        },
+        isDayChanged: function(isDay) {
+            if (isDay) {
+                daynight.letThereBeDay();
+            } else {
+                daynight.letThereBeNight();
+            }
+        },
+        compassChanged: function(angle) {
+            compass.setAngle(angle);
         }
     });
 
     function changeWind(angle) {
         hub.server.changeWind(angle);
+    }
+    
+    function changeIsDay(isDay) {
+        hub.server.changeIsDay(isDay);
+    }
+
+    function changeCompass(angle) {
+        game.compassAngle = angle;
+        hub.server.changeCompass(angle);
     }
     
     function addPlayer(player) {
@@ -86,5 +105,8 @@
         $.connection.hub.start().done(done || {});
     };
     game.changeWind = changeWind;
+    game.changeIsDay = changeIsDay;
+    game.changeCompass = changeCompass;
+    game.compassAngle = 0;
 
-}(window.game = window.game || {}, starfield, jQuery));
+}(window.game = window.game || {}, starfield, daynight, compass, jQuery));

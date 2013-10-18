@@ -22,6 +22,16 @@ namespace Sensors.Web.Hubs {
             Clients.All.windChanged(angle);
         }
 
+        public void ChangeIsDay(bool isDay) {
+            _game.IsDay = isDay;
+            Clients.All.isDayChanged(isDay);
+        }
+
+        public void ChangeCompass(double angle) {
+            _game.CompassAngle = angle;
+            Clients.All.compassChanged(angle);
+        }
+
         public void MovePlayer(double x, double y) {
             _game.MovePlayer(Context.ConnectionId, x, y);
             Clients.Others.shapeMoved(Context.ConnectionId, x, y);
@@ -38,6 +48,7 @@ namespace Sensors.Web.Hubs {
             Clients.Others.addOtherPlayer(player);
             Clients.Caller.addPlayer(player);
             Clients.Caller.windChanged(_game.WindAngle);
+            Clients.All.isDayChanged(_game.IsDay);
             Clients.All.clientDeathChanged(_game.DeathCount);
 
             return Clients.All.clientCountChanged(_game.PlayersDic.Count);

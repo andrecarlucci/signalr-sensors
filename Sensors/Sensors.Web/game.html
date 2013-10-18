@@ -24,10 +24,10 @@
         <button onclick="game.changeWind(360)">r</button>
         <button onclick="game.changeWind(-1)">c</button>
         
-        <button onclick="daynight.letThereBeDay()">on</button>
-        <button onclick="daynight.letThereBeNight()">off</button>
+        <button onclick="game.changeIsDay(true)">on</button>
+        <button onclick="game.changeIsDay(false)">off</button>
         
-        <button onclick="rotate(10)">rot</button>
+        <button onclick="game.changeCompass(game.compassAngle + 10)">rot</button>
     </div>
     
     <div id="sun_yellow"></div>
@@ -47,6 +47,7 @@
     <script src="Scripts/jquery.color.js"></script>
     <script src="Scripts/jquery.rotate.js"></script>
     <script src="Scripts/daynight.js"></script>
+    <script src="Scripts/compass.js"></script>
     <script src="Scripts/jquery.signalR-1.1.3.js"></script>
     <script src="./signalr/hubs"></script>
 
@@ -58,12 +59,7 @@
             game.start();
         });
 
-        var needleAngle = 0;
-        function rotate(rotationrange) {
-            needleAngle += rotationrange;
-            var angle = parseInt(needleAngle, 10);
-            $("#needle").rotate(angle);
-        }
+        
     </script>
 </body>
 </html>

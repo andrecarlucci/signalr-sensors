@@ -23,12 +23,16 @@ namespace Sensors.Web.Hubs {
         public ConcurrentDictionary<string, Player> PlayersDic = new ConcurrentDictionary<string, Player>();
         public Player Boss { get; set; }
         public double WindAngle { get; set; }
+
+        public bool IsDay { get; set; }
+        public double CompassAngle { get; set; }
         public int DeathCount { get; set; }
 
         private Timer _timer;
         private IHubContext _context;
 
         private Game() {
+            IsDay = true;
             Boss = new Player("boss");
             Boss.Speed = 0.05;
             _context = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
