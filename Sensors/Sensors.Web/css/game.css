@@ -7,49 +7,70 @@
 }
 
 .player {
-    width: 50px;
-    height: 50px;
-    background-color: #0094ff;
+    background:transparent url(../Content/otherPlayer.png) center center;
+    background-size: 80px 80px;
+    width: 80px;
+    height: 80px;
     position: absolute;
+    z-index: 99;
 }
 
 .me {
-    background-color: #b0e0e6;
+    background:transparent url(../Content/player.png) center center;
+    background-size: 80px 80px;
     cursor: move;
+    width: 80px;
+    height: 80px;
+    z-index: 99;
 }
 
 #boss {
-    width: 50px;
-    height: 50px;
-    background-color: #a52a2a;
-    position: relative;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    visibility: hidden;
+    z-index: 99;
 }
 
-#clientCount {
+#info {
     position: absolute;
     top: 0;
     right: 10px;
     font-size: 72px;
     color: #cdcdcd;
+    z-index: 99;
 }
 
 canvas {
-    background-color: #FFFFFF;
     overflow: hidden;
-    z-index: -1;
     top: 0;
+    z-index: 10;
 }
 
 button {
     width: 20px;
     height: 20px;
+    z-index: 99;
 }
 
 .buttons {
     position: absolute;
     top: 0;
-    z-index: 2;
+    z-index: 99;
 }
 
-body {
+#compass {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 150px;
+    z-index: 99;
+}
+
+#needle {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 150px;
+    z-index: 99;
 }

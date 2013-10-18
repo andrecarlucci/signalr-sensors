@@ -1,0 +1,1 @@
+C:\Projects\Palestras\Intel_Software_Day\Sensors\Sensors.App\Sensors.App.csproj;neutral

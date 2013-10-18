@@ -1,9 +1,11 @@
 ﻿/// <reference path="jquery.signalR-1.1.3.js" />
 /// <reference path="jquery-1.6.4.js" />
-$(function () {
+(function (game, starfield, $, undefined) {
+    
     var hub = $.connection.gameHub,
         $boss = $("#boss"),
-        $clientCount = $("#clientCount"),
+        $clientCount = $("#clientCountSpan"),
+        $deathCount = $("#deathCountSpan"),
         body = window.document.body,
         $me;
 
@@ -30,19 +32,20 @@ $(function () {
             }
             $shape.css({
                 left: (body.clientWidth - $shape.width()) * x,
-                top: (body.clientHeight - $shape.height()) * y
+                top: (body.clientHeight - $shape.height()) * y,
+                visibility: 'visible'
             });
             //console.log("Moved: " + $shape.attr('id') + " left: " + x + " right: " + y);
         },
         clientCountChanged: function(count) {
             $clientCount.text(count);
         },
+        clientDeathChanged: function (count) {
+            $deathCount.text(count);
+        },
         windChanged: function(angle) {
-            changeDirection
+            starfield.changeDirection(angle);
         }
-    });
-
-    $.connection.hub.start().done(function () {
     });
 
     function changeWind(angle) {
@@ -78,4 +81,10 @@ $(function () {
         });
         //console.log("id: "+ id +" -> x: " + x + " y: " + y);
     }
-});
+
+    game.start = function(done) {
+        $.connection.hub.start().done(done || {});
+    };
+    game.changeWind = changeWind;
+
+}(window.game = window.game || {}, starfield, jQuery));

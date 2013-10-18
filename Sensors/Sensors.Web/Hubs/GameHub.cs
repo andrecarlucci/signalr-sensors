@@ -19,7 +19,7 @@ namespace Sensors.Web.Hubs {
 
         public void ChangeWind(double angle) {
             _game.WindAngle = angle;
-            Clients.Others.windChanged(angle);
+            Clients.All.windChanged(angle);
         }
 
         public void MovePlayer(double x, double y) {
@@ -31,12 +31,15 @@ namespace Sensors.Web.Hubs {
             foreach (var p in _game.PlayersDic) {
                 Clients.Caller.addOtherPlayer(p.Value);
             }
-            
+
             var player = new Player(Context.ConnectionId);
             _game.AddPlayer(player);
 
             Clients.Others.addOtherPlayer(player);
             Clients.Caller.addPlayer(player);
+            Clients.Caller.windChanged(_game.WindAngle);
+            Clients.All.clientDeathChanged(_game.DeathCount);
+
             return Clients.All.clientCountChanged(_game.PlayersDic.Count);
         }
 

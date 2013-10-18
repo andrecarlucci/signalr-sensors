@@ -23,12 +23,15 @@ namespace Sensors.Web.Hubs {
         public ConcurrentDictionary<string, Player> PlayersDic = new ConcurrentDictionary<string, Player>();
         public Player Boss { get; set; }
         public double WindAngle { get; set; }
+        public int DeathCount { get; set; }
 
         private Timer _timer;
+        private IHubContext _context;
 
         private Game() {
             Boss = new Player("boss");
             Boss.Speed = 0.05;
+            _context = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
             _timer = new Timer(Tick, null, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(500));
         }
 
@@ -46,6 +49,9 @@ namespace Sensors.Web.Hubs {
         public void MoveBoss(List<Player> players) {
             if (players.Count == 0) return;
             var b = Boss;
+            if (Double.IsNaN(b.Px)) b.Px = 0;
+            if (Double.IsNaN(b.Py)) b.Py = 0;
+
             var target = players.OrderBy(p => (Math.Pow(b.Px - p.Px, 2) + Math.Pow(b.Py - p.Py, 2))).First();
 
             var y = target.Py - b.Py;
@@ -57,6 +63,18 @@ namespace Sensors.Web.Hubs {
 
             b.Px += xl;
             b.Py += yl;
+
+            Debug.WriteLine("-----> " + z);
+            if (z < b.Speed) {
+                KillPlayer(target.Id);
+            }
+        }
+
+        public void KillPlayer(string playerId) {
+            DeathCount++;
+            _context.Clients.All.clientDeathChanged(DeathCount);
+            RemovePlayer(playerId);
+            _context.Clients.All.removePlayer(playerId);
         }
 
         public void AddPlayer(Player player) {

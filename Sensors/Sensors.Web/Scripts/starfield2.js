@@ -1,46 +1,36 @@
 ﻿(function (starfield, $, undefined) {
     'use strict';
     
-    function get_screen_size() {
-        var w = document.documentElement.clientWidth;
-        var h = document.documentElement.clientHeight;
-        return Array(w, h);
+    function getScreenSize() {
+        var wid = document.documentElement.clientWidth;
+        var hei = document.documentElement.clientHeight;
+        return Array(wid, hei);
     }
 
-    var flag = true;
+    var angle = -1;
     var test = true;
-    var n = 20;
+    var n = 30;
     var w = 0;
     var h = 0;
     var x = 0;
     var y = 0;
     var z = 0;
-    var star_color_ratio = 0;
-    var star_x_save, star_y_save;
-    var star_ratio = 256;
-    var star_speed = 4;
-    var star_speed_save = 0;
+    var starColorRatio = 0;
+    var starXSave, starYSave;
+    var starRatio = 256;
+    var starSpeed = 4;
     var star = new Array(n);
-    var opacity = 0.1;
 
-    var cursor_x = 0;
-    var cursor_y = 0;
-    var mouse_x = 0;
-    var mouse_y = 0;
-
-    var canvas_x = 0;
-    var canvas_y = 0;
-    var canvas_w = 0;
-    var canvas_h = 0;
+    var cursorX = 0;
+    var cursorY = 0;
+    var mouseX = 0;
+    var mouseY = 0;
     var context;
-
-    var key;
 
     var timeout;
     var fps = 5;
 
     function init() {
-        var a = 0;
         for (var i = 0; i < n; i++) {
             star[i] = new Array(5);
             star[i][0] = Math.random() * w * 2 - x * 2;
@@ -54,20 +44,20 @@
         stars.width = w;
         stars.height = h;
         context = stars.getContext('2d');
-        //context.lineCap='round';
-        //context.fillStyle = 'rgb(0,0,0)';
+        context.lineCap='round';
+        context.fillStyle = 'rgb(0,60,171)';
         context.strokeStyle = 'rgb(255,255,255)';
     }
 
     function anim() {
-        mouse_x = cursor_x - x;
-        mouse_y = cursor_y - y;
+        mouseX = cursorX - x;
+        mouseY = cursorY - y;
         context.fillRect(0, 0, w, h);
         for (var i = 0; i < n; i++) {
             test = true;
-            star_x_save = star[i][3];
-            star_y_save = star[i][4];
-            star[i][0] += mouse_x >> 4;
+            starXSave = star[i][3];
+            starYSave = star[i][4];
+            star[i][0] += mouseX >> 4;
             if (star[i][0] > x << 1) {
                 star[i][0] -= w << 1;
                 test = false;
@@ -76,7 +66,7 @@
                 star[i][0] += w << 1;
                 test = false;
             }
-            star[i][1] += mouse_y >> 4;
+            star[i][1] += mouseY >> 4;
             if (star[i][1] > y << 1) {
                 star[i][1] -= h << 1;
                 test = false;
@@ -85,7 +75,7 @@
                 star[i][1] += h << 1;
                 test = false;
             }
-            star[i][2] -= star_speed;
+            star[i][2] -= starSpeed;
             if (star[i][2] > z) {
                 star[i][2] -= z;
                 test = false;
@@ -94,12 +84,12 @@
                 star[i][2] += z;
                 test = false;
             }
-            star[i][3] = x + (star[i][0] / star[i][2]) * star_ratio;
-            star[i][4] = y + (star[i][1] / star[i][2]) * star_ratio;
-            if (star_x_save > 0 && star_x_save < w && star_y_save > 0 && star_y_save < h && test) {
-                context.lineWidth = (1 - star_color_ratio * star[i][2]) * 2;
+            star[i][3] = x + (star[i][0] / star[i][2]) * starRatio;
+            star[i][4] = y + (star[i][1] / star[i][2]) * starRatio;
+            if (starXSave > 0 && starXSave < w && starYSave > 0 && starYSave < h && test) {
+                context.lineWidth = (1 - starColorRatio * star[i][2]) * 4;
                 context.beginPath();
-                context.moveTo(star_x_save, star_y_save);
+                context.moveTo(starXSave, starYSave);
                 context.lineTo(star[i][3], star[i][4]);
                 context.stroke();
                 context.closePath();
@@ -108,118 +98,73 @@
         timeout = setTimeout('starfield.anim()', fps);
     }
 
-    function move(evt) {
-        evt = evt || event;
-        cursor_x = evt.pageX - canvas_x;
-        cursor_y = evt.pageY - canvas_y;
-        console.log(cursor_x);
-        console.log(cursor_y);
-    }
-
-    function key_manager(evt) {
-        evt = evt || event;
-        key = evt.which || evt.keyCode;
-        //ctrl=evt.ctrlKey;
-        switch (key) {
-            case 27:
-                flag = flag ? false : true;
-                if (flag) {
-                    timeout = setTimeout('anim()', fps);
-                } else {
-                    clearTimeout(timeout);
-                }
-                break;
-            case 32:
-                star_speed_save = (star_speed != 0) ? star_speed : star_speed_save;
-                star_speed = (star_speed != 0) ? 0 : star_speed_save;
-                break;
-            case 13:
-                context.fillStyle = 'rgba(0,0,0,' + opacity + ')';
-                break;
-        }
-        top.status = 'key=' + ((key < 100) ? '0' : '') + ((key < 10) ? '0' : '') + key;
-    }
-
-    function release() {
-        switch (key) {
-            case 13:
-                context.fillStyle = 'rgb(0,0,0)';
-                break;
-        }
-    }
-
-    function mouse_wheel(evt) {
-        evt = evt || event;
-        var delta = 0;
-        if (evt.wheelDelta) {
-            delta = evt.wheelDelta / 120;
-        } else if (evt.detail) {
-            delta = -evt.detail / 3;
-        }
-        star_speed += (delta >= 0) ? -0.2 : 0.2;
-        if (evt.preventDefault) evt.preventDefault();
-    }
-
     starfield.start = function() {
         resize();
         anim();
     };
 
     function resize() {
-        w = parseInt(get_screen_size()[0]);
-        h = parseInt(get_screen_size()[1]);
+        w = parseInt(getScreenSize()[0]);
+        h = parseInt(getScreenSize()[1]);
         x = Math.round(w / 2);
         y = Math.round(h / 2);
         z = (w + h) / 2;
-        star_color_ratio = 1 / z;
-        cursor_x = x;
-        cursor_y = y;
+        starColorRatio = 1 / z;
+        cursorX = x;
+        cursorY = y;
         init();
     }
 
     function startsDirection(x, y) {
-        cursor_x = x;
-        cursor_y = y;
+        cursorX = x;
+        cursorY = y;
     }
 
     function starsUp() {
-        cursor_x = document.documentElement.clientWidth / 2;
-        cursor_y = 0;
+        cursorX = document.documentElement.clientWidth / 2;
+        cursorY = 0;
     }
     function starsDown() {
-        cursor_x = document.documentElement.clientWidth / 2;
-        cursor_y = document.documentElement.clientHeight;
+        cursorX = document.documentElement.clientWidth / 2;
+        cursorY = document.documentElement.clientHeight;
     }
     function starsLeft() {
-        cursor_x = 0;
-        cursor_y = document.documentElement.clientHeight / 2;
+        cursorX = 0;
+        cursorY = document.documentElement.clientHeight / 2;
     }
     function starsRight() {
-        cursor_x = document.documentElement.clientWidth;
-        cursor_y = document.documentElement.clientHeight / 2;;
+        cursorX = document.documentElement.clientWidth;
+        cursorY = document.documentElement.clientHeight / 2;;
     }
     function starsCenter() {
-        cursor_x = document.documentElement.clientWidth / 2;
-        cursor_y = document.documentElement.clientHeight / 2;
+        cursorX = document.documentElement.clientWidth / 2;
+        cursorY = document.documentElement.clientHeight / 2;
     }
 
-    function changeDirection(angle) {
-        if (angle < 0) {
+    function changeDirection(newAngle) {
+        if (!newAngle) return;
+        if (newAngle < 0) {
             starsCenter();
         }
-        else if (angle > 315 && angle <= 45) {
+        else if (newAngle > 315 || newAngle <= 45) {
             starsRight();
         }
-        else if (angle > 45 && angle <= 135) {
+        else if (newAngle > 45 && newAngle <= 135) {
             starsUp();
         }
-        else if (angle > 135 && angle <= 225) {
+        else if (newAngle > 135 && newAngle <= 225) {
             starsLeft();
         }
-        else if (angle > 225 && angle <= 315) {
+        else if (newAngle > 225 && newAngle <= 315) {
             starsDown();
         }
+        this.angle = newAngle;
     }
+
+    document.body.onresize = document.body.onorientationchange = function() {
+        starfield.resize();
+        changeDirection(this.angle);
+    };
 
     starfield.anim = anim;
     starfield.resize = resize;

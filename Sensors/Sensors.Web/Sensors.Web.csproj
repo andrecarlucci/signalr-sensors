@@ -83,6 +83,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chat.html" />
+    <Content Include="Content\compass.png" />
+    <Content Include="Content\ground.png" />
+    <Content Include="Content\moon.png" />
+    <Content Include="Content\needle.png" />
+    <Content Include="Content\otherPlayer.png" />
+    <Content Include="Content\player.png" />
+    <Content Include="Content\shootingstar.png" />
+    <Content Include="Content\space-invader.png" />
+    <Content Include="Content\space-invader_w.png" />
+    <Content Include="Content\stars.png" />
+    <Content Include="Content\sun.png" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -145,19 +156,24 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="css\daynight.css" />
     <Content Include="css\game.css" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
+    <Content Include="Scripts\compass.js" />
+    <Content Include="Scripts\daynight.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\jquery.color.js" />
+    <Content Include="Scripts\jquery.rotate.js" />
     <Content Include="Scripts\jquery.signalR-1.1.3.js" />
     <Content Include="Scripts\jquery.signalR-1.1.3.min.js" />
     <Content Include="Scripts\jquery.ui.touch-punch.js" />
-    <Content Include="Scripts\shapes.js" />
+    <Content Include="Scripts\game.js" />
     <Content Include="Scripts\starfield2.js" />
     <Content Include="Scripts\starfield.js" />
     <Content Include="sensors.html" />
