@@ -47,12 +47,12 @@ namespace Sensors.App {
         }
 
         private async void NewRead(Gyrometer sender, GyrometerReadingChangedEventArgs args) {
-            //await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
-            //    GyrometerReading reading = e.Reading;
-            //    ScenarioOutput_X.Text = String.Format("{0,5:0.00}", reading.AngularVelocityX);
-            //    ScenarioOutput_Y.Text = String.Format("{0,5:0.00}", reading.AngularVelocityY);
-            //    ScenarioOutput_Z.Text = String.Format("{0,5:0.00}", reading.AngularVelocityZ);
-            //});
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
+                GyrometerReading reading = args.Reading;
+                Tx.Text = String.Format("{0,5:0.00}", reading.AngularVelocityX);
+                Ty.Text = String.Format("{0,5:0.00}", reading.AngularVelocityY);
+                Tz.Text = String.Format("{0,5:0.00}", reading.AngularVelocityZ);
+            });
         }
     }
 }

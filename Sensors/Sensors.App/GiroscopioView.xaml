@@ -6,8 +6,43 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{ThemeResource ApplicationForegroundThemeBrush}" />
+            <Setter Property="FontSize" Value="148"/>
+        </Style>
+        <Style x:Key="Panel" TargetType="Grid">
+            <Setter Property="Width" Value="380" />
+            <Setter Property="Height" Value="150" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="120" />
+            <Setter Property="Margin" Value="0,24,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image Source="Assets/accelerometer.png"
+               Width="600"
+               Height="600"
+               />
 
+        <Grid Style="{StaticResource Panel}" HorizontalAlignment="Left">
+            <TextBlock Text="Z:"/>
+            <TextBlock x:Name="Tz" Text="0.00" Style="{StaticResource Label}" />
+        </Grid>
+
+        <Grid Style="{StaticResource Panel}">
+            <TextBlock Text="Y:"  />
+            <TextBlock x:Name="Ty" Text="0.00" Style="{StaticResource Label}" />
+        </Grid>
+
+        <Grid Style="{StaticResource Panel}" VerticalAlignment="Bottom">
+            <TextBlock Text="X:" />
+            <TextBlock x:Name="Tx" Text="-0.00" Style="{StaticResource Label}" />
+        </Grid>
     </Grid>
 </Page>

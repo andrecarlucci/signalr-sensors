@@ -18,7 +18,9 @@
             <Setter Property="Margin" Value="12" />
         </Style>
     </Page.Resources>
-    <GridView Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <VariableSizedWrapGrid  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
         <Grid Style="{StaticResource Botao}" PointerReleased="AcelerometroClick">
             <TextBlock>Acelerômetro</TextBlock>
         </Grid>
@@ -28,5 +30,5 @@
         <Grid Style="{StaticResource Botao}">
             <TextBlock>Bússola</TextBlock>
         </Grid>
-    </GridView>
+    </VariableSizedWrapGrid >
 </Page>
