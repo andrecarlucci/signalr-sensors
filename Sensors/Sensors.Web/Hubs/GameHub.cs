@@ -32,6 +32,10 @@ namespace Sensors.Web.Hubs {
             Clients.All.compassChanged(angle);
         }
 
+        public void ChangeBossSpeed(double speed) {
+            _game.Boss.Speed = speed;
+        }
+
         public void MovePlayer(double x, double y) {
             _game.MovePlayer(Context.ConnectionId, x, y);
             Clients.Others.shapeMoved(Context.ConnectionId, x, y);

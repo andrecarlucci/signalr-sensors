@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="Sensors.App.BussolaView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Sensors.App"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Sensors.App.Controls"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{ThemeResource ApplicationForegroundThemeBrush}" />
+            <Setter Property="FontSize" Value="148"/>
+        </Style>
+        <Style x:Key="Panel" TargetType="Grid">
+            <Setter Property="Width" Value="380" />
+            <Setter Property="Height" Value="200" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="120" />
+            <Setter Property="Margin" Value="0,24,0,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        
+        
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image Source="/Assets/back.png" VerticalAlignment="Top" HorizontalAlignment="Left" Width="96" Height="96" Margin="12,24" PointerReleased="BackClicked"/>
+
+        <Image Source="/Assets/compass.png"
+               Width="600"
+               Height="600"
+               VerticalAlignment="Bottom"
+               />
+        <Image x:Name="Neddle"
+               Source="/Assets/needle.png"
+               Width="600"
+               Height="600"
+               VerticalAlignment="Bottom"
+               >
+        	<Image.Projection>
+        		<PlaneProjection x:Name="NeedleRotation" RotationZ="-91"/>
+        	</Image.Projection>
+        </Image>
+
+        <Grid Style="{StaticResource Panel}" Width="780">
+            <TextBlock Text="Angle:" />
+            <TextBlock x:Name="Tangle" Text="360.00" Style="{StaticResource Label}" />
+        </Grid>
+    </Grid>
+</Page>

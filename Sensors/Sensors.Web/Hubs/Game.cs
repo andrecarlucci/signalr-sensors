@@ -34,7 +34,7 @@ namespace Sensors.Web.Hubs {
         private Game() {
             IsDay = true;
             Boss = new Player("boss");
-            Boss.Speed = 0.05;
+            Boss.Speed = 0.02;
             _context = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
             _timer = new Timer(Tick, null, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(500));
         }

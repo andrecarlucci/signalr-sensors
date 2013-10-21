@@ -13,6 +13,7 @@
     height: 80px;
     position: absolute;
     z-index: 99;
+    -ms-touch-action: none;
 }
 
 .me {

@@ -5,7 +5,7 @@
     'use strict';
 
     compass.setAngle = function (rotationrange) {
-        var angle = parseInt(rotationrange, 10);
+        var angle = parseInt(rotationrange, 10) * -1;
         $("#needle").rotate(angle);
     };
     

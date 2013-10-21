@@ -102,10 +102,27 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="GiroscopioView.xaml.cs">
+    <Compile Include="Common\Brushes.cs" />
+    <Compile Include="Common\Config.cs" />
+    <Compile Include="Controls\BasePage.cs" />
+    <Compile Include="Controls\ConnectionStatus.xaml.cs">
+      <DependentUpon>ConnectionStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Signalr\Direction.cs" />
+    <Compile Include="Signalr\GameClient.cs" />
+    <Compile Include="Views\AcelerometroView.xaml.cs">
+      <DependentUpon>AcelerometroView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BussolaView.xaml.cs">
+      <DependentUpon>BussolaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Multitouch.xaml.cs">
+      <DependentUpon>Multitouch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SensorDeLuzView.xaml.cs">
+      <DependentUpon>SensorDeLuzView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GiroscopioView.xaml.cs">
       <DependentUpon>GiroscopioView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -120,11 +137,18 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="packages.config" />
     <None Include="Sensors.App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\accelerometer.png" />
+    <Content Include="Assets\arrows.png" />
+    <Content Include="Assets\back.png" />
+    <Content Include="Assets\compass.png" />
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\needle.png" />
+    <Content Include="Assets\off.png" />
+    <Content Include="Assets\on.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
@@ -134,7 +158,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="GiroscopioView.xaml">
+    <Page Include="Common\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\ConnectionStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AcelerometroView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BussolaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Multitouch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SensorDeLuzView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GiroscopioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,10 +192,32 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Client">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.0.0\lib\portable-net45+sl5+netcore45+wp8\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\netcore45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\win8\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\win8\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converter\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.10\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

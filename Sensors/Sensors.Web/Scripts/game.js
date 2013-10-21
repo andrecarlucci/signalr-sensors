@@ -18,12 +18,14 @@
             $me = $("#" + player.Id);
             $me.addClass("me");
             addDraggable($me);
+            talk($me, 'Arraste-me para longe do monstro!');
         },
         removePlayer: function(playerId) {
             var div;
             if (div = document.getElementById(playerId)) {
                 div.parentNode.removeChild(div);
             }
+            talk($boss, 'Hmmmm!');
         },
         shapeMoved: function(id, x, y) {
             var $shape = $("#" + id);
@@ -83,13 +85,15 @@
         $playerDiv.draggable({
             containment: "parent",
             drag: function () {
-                var $this = $(this),
-                x = this.offsetLeft / (body.clientWidth - $this.width()),
-                y = this.offsetTop / (body.clientHeight - $this.height());
+                //if (this.lastUpdate != undefined && $.now() - this.lastUpdate < 200) {
+                //    return;
+                //}
+                var x = this.offsetLeft / (body.clientWidth - this.offsetWidth);
+                var y = this.offsetTop / (body.clientHeight - this.offsetHeight);
+                //this.lastUpdate = $.now();
                 hub.server.movePlayer(x, y);
             }
         });
-        $playerDiv.css('-ms-touch-action', 'none');
     }
 
     function moveShape(id, x, y) {
@@ -98,7 +102,13 @@
             left: (body.clientWidth - $shape.width()) * x,
             top: (body.clientHeight - $shape.height()) * y
         });
-        //console.log("id: "+ id +" -> x: " + x + " y: " + y);
+    }
+
+    function talk($shape, text) {
+        $shape.showBalloon({ contents: text });
+        setTimeout(function () {
+            $shape.hideBalloon();
+        }, 2000);
     }
 
     game.start = function(done) {
