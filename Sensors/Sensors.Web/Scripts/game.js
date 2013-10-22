@@ -37,7 +37,6 @@
                 top: (body.clientHeight - $shape.height()) * y,
                 visibility: 'visible'
             });
-            //console.log("Moved: " + $shape.attr('id') + " left: " + x + " right: " + y);
         },
         clientCountChanged: function(count) {
             $clientCount.text(count);
@@ -85,12 +84,8 @@
         $playerDiv.draggable({
             containment: "parent",
             drag: function () {
-                //if (this.lastUpdate != undefined && $.now() - this.lastUpdate < 200) {
-                //    return;
-                //}
                 var x = this.offsetLeft / (body.clientWidth - this.offsetWidth);
                 var y = this.offsetTop / (body.clientHeight - this.offsetHeight);
-                //this.lastUpdate = $.now();
                 hub.server.movePlayer(x, y);
             }
         });

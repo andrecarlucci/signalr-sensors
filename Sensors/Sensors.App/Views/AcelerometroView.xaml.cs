@@ -25,11 +25,11 @@ namespace Sensors.App.Views {
 
         private void Page_Loaded(object sender, RoutedEventArgs e) {
             if (_sensor == null) {
-                CreateGyrometer();
+                CreateAcelerometro();
             }
         }
 
-        private void CreateGyrometer() {
+        private void CreateAcelerometro() {
             _sensor = Accelerometer.GetDefault();
             if (_sensor == null) {
                 new MessageDialog("Acelerômetro não suportado!", "Desculpe").ShowAsync();

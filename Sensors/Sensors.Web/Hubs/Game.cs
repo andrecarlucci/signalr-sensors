@@ -47,6 +47,21 @@ namespace Sensors.Web.Hubs {
             MoveBoss(players);
             var context = GlobalHost.ConnectionManager.GetHubContext<GameHub>();
             context.Clients.All.shapeMoved("boss", Boss.Px, Boss.Py);
+
+            //var windPower = 0.001;
+            //if (WindAngle > 0) {
+            //    if (WindAngle > 359) { //west
+            //        players.ForEach(x => context.Clients.All.shapeMoved(x.Id, x.Px+windPower, x.Py));
+            //    }
+            //}
+
+    //            public enum Direction {
+    //    None = -1,
+    //    North = 90,
+    //    South = 270,
+    //    East = 180,
+    //    West = 360
+    //}
             Debug.WriteLine("tick: x:" + Boss.Px +" y: "+ Boss.Py);
         }
 
