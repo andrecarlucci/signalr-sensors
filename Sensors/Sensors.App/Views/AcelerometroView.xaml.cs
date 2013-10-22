@@ -50,11 +50,11 @@ namespace Sensors.App.Views {
 
                 Direction direction;
                 if (x > _upperLimit) {
-                    direction = Direction.East;
+                    direction = Direction.West;
                     Ty.Foreground = new SolidColorBrush(Colors.Green);
                 }
                 else if (x < _lowerLimit) {
-                    direction = Direction.West;
+                    direction = Direction.East;
                     Ty.Foreground = new SolidColorBrush(Colors.Green);
                 }
                 else if (z > _lowerLimit) {
