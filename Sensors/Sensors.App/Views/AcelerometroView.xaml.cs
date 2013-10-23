@@ -11,13 +11,15 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Sensors.App.Common;
 using Sensors.App.Signalr;
+using Windows.Foundation.Diagnostics;
 
 namespace Sensors.App.Views {
     public sealed partial class AcelerometroView : Page {
 
         private Accelerometer _sensor;
-        private double _upperLimit = 0.5;
-        private double _lowerLimit = -0.5;
+        private double _upperLimit = 0.8;
+        private double _lowerLimit = -0.8;
+        private LoggingChannel _logger;
 
         public AcelerometroView() {
             InitializeComponent();
@@ -29,14 +31,16 @@ namespace Sensors.App.Views {
             }
         }
 
-        private void CreateAcelerometro() {
+        private async void CreateAcelerometro() {
+            _logger = new LoggingChannel("sensors");
             _sensor = Accelerometer.GetDefault();
             if (_sensor == null) {
-                new MessageDialog("Acelerômetro não suportado!", "Desculpe").ShowAsync();
+                await new MessageDialog("Acelerômetro não suportado!", "Desculpe").ShowAsync();
                 return;
             }
-            _sensor.ReportInterval = Config.SensorRefreshInterval; //_sensor.MinimumReportInterval > 16 ? _sensor.MinimumReportInterval : 16;
+            _sensor.ReportInterval = Config.SensorRefreshInterval < _sensor.MinimumReportInterval ? _sensor.MinimumReportInterval : Config.SensorRefreshInterval;
             _sensor.ReadingChanged += NewRead;
+            _logger.LogMessage("Accelerometer Start", LoggingLevel.Information);
         }
 
         private async void NewRead(Accelerometer sender, AccelerometerReadingChangedEventArgs args) {
@@ -83,6 +87,7 @@ namespace Sensors.App.Views {
             if (_sensor != null) {
                 _sensor.ReportInterval = 0;
                 _sensor.ReadingChanged -= NewRead;
+                _logger.LogMessage("Accelerometer End", LoggingLevel.Information);
             }
             Frame.GoBack();
         }

@@ -78,8 +78,8 @@ namespace Sensors.App {
             GameClient.Current.StateChanged -= ConnectionStateChanged;
         }
 
-        private void ConnectionStateChanged(ConnectionState state) {
-            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
+        private async void ConnectionStateChanged(ConnectionState state) {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
                 switch (state) {
                     case ConnectionState.Connecting:
                         Status.Fill = Colors.Yellow.ToBrush();

@@ -26,7 +26,6 @@ namespace Sensors.App {
     public sealed partial class BussolaView : Page {
 
         private Compass _sensor;
-        private int _limit = 20;
 
         private bool IsOn { get; set; }
         public BussolaView() {
@@ -40,13 +39,13 @@ namespace Sensors.App {
             }
         }
 
-        private void CreateGyrometer() {
+        private async void CreateGyrometer() {
             _sensor = Compass.GetDefault();
             if (_sensor == null) {
-                new MessageDialog("Bússola não suportada!", "Desculpe").ShowAsync();
+                await new MessageDialog("Bússola não suportada!", "Desculpe").ShowAsync();
                 return;
             }
-            _sensor.ReportInterval = Config.SensorRefreshInterval;
+            _sensor.ReportInterval = Config.SensorRefreshInterval < _sensor.MinimumReportInterval ? _sensor.MinimumReportInterval : Config.SensorRefreshInterval;
             _sensor.ReadingChanged += NewRead;
         }
 

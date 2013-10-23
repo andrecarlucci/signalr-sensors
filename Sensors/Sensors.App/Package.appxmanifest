@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="4a4630a7-091b-49ba-9bd3-730511eeb2f1" Publisher="CN=Andre" Version="1.0.0.0" />
+  <Identity Name="4a4630a7-091b-49ba-9bd3-730511eeb2f1" Publisher="CN=Andre" Version="1.0.0.2" />
   <Properties>
     <DisplayName>Sensors.App</DisplayName>
     <PublisherDisplayName>Andre</PublisherDisplayName>

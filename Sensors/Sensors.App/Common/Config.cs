@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace Sensors.App.Common {
     public static class Config {
-        public static uint SensorRefreshInterval = 500;
+        public static uint SensorRefreshInterval = 0;
     }
 }

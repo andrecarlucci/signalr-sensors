@@ -38,13 +38,13 @@ namespace Sensors.App {
             }
         }
 
-        private void CreateGyrometer() {
+        private async void CreateGyrometer() {
             _sensor = Gyrometer.GetDefault();
             if (_sensor == null) {
-                new MessageDialog("Gyrometer não suportado!", "Desculpe").ShowAsync();
+                await new MessageDialog("Gyrometer não suportado!", "Desculpe").ShowAsync();
                 return;
             }
-            _sensor.ReportInterval = Config.SensorRefreshInterval;
+            _sensor.ReportInterval = Config.SensorRefreshInterval < _sensor.MinimumReportInterval ? _sensor.MinimumReportInterval : Config.SensorRefreshInterval;
             _sensor.ReadingChanged += NewRead;
         }
 
