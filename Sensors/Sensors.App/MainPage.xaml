@@ -21,7 +21,7 @@
         </Style>
     </controls:BasePage.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="62"/>
@@ -57,7 +57,7 @@
 
             <TextBlock Text="Server Address: http://" PointerReleased="ShowAddress" />
             <TextBox x:Name="tUrl" 
-                     Text="192.168.0.105/Sensors" 
+                     Text="192.168.1.6/Sensors" 
                      FontSize="24"
                      Grid.Column="1" Height="46" TabIndex="1" Visibility="Collapsed" 
                      />

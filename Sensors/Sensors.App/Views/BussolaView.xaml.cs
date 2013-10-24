@@ -45,7 +45,9 @@ namespace Sensors.App {
                 await new MessageDialog("Bússola não suportada!", "Desculpe").ShowAsync();
                 return;
             }
-            _sensor.ReportInterval = Config.SensorRefreshInterval < _sensor.MinimumReportInterval ? _sensor.MinimumReportInterval : Config.SensorRefreshInterval;
+            _sensor.ReportInterval = Config.SensorRefreshInterval < _sensor.MinimumReportInterval ? 
+                                    _sensor.MinimumReportInterval : 
+                                    Config.SensorRefreshInterval;
             _sensor.ReadingChanged += NewRead;
         }
 

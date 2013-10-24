@@ -19,7 +19,7 @@ namespace Sensors.App.Views {
         private Accelerometer _sensor;
         private double _upperLimit = 0.8;
         private double _lowerLimit = -0.8;
-        private LoggingChannel _logger;
+        private static LoggingChannel Logger = new LoggingChannel("sensors");
 
         public AcelerometroView() {
             InitializeComponent();
@@ -32,15 +32,16 @@ namespace Sensors.App.Views {
         }
 
         private async void CreateAcelerometro() {
-            _logger = new LoggingChannel("sensors");
             _sensor = Accelerometer.GetDefault();
             if (_sensor == null) {
                 await new MessageDialog("Acelerômetro não suportado!", "Desculpe").ShowAsync();
                 return;
             }
-            _sensor.ReportInterval = Config.SensorRefreshInterval < _sensor.MinimumReportInterval ? _sensor.MinimumReportInterval : Config.SensorRefreshInterval;
+            _sensor.ReportInterval = Config.SensorRefreshInterval < _sensor.MinimumReportInterval ? 
+                                            _sensor.MinimumReportInterval : 
+                                            Config.SensorRefreshInterval;
             _sensor.ReadingChanged += NewRead;
-            _logger.LogMessage("Accelerometer Start", LoggingLevel.Information);
+            Logger.LogMessage("Accelerometer Start", LoggingLevel.Information);
         }
 
         private async void NewRead(Accelerometer sender, AccelerometerReadingChangedEventArgs args) {
@@ -52,31 +53,31 @@ namespace Sensors.App.Views {
                 Ty.Text = String.Format("{0,5:0.00}", y);
                 Tz.Text = String.Format("{0,5:0.00}", z);
 
+                var green = new SolidColorBrush(Colors.Green);
+
                 Direction direction;
                 if (x > _upperLimit) {
                     direction = Direction.West;
-                    Ty.Foreground = new SolidColorBrush(Colors.Green);
+                    Ty.Foreground = green;
                 }
                 else if (x < _lowerLimit) {
                     direction = Direction.East;
-                    Ty.Foreground = new SolidColorBrush(Colors.Green);
+                    Ty.Foreground = green;
                 }
                 else if (z > _lowerLimit) {
                     direction = Direction.South;
-                    Tz.Foreground = new SolidColorBrush(Colors.Green);
+                    Tz.Foreground = green;
                 }
                 else if (y < _lowerLimit) {
                     direction = Direction.North;
-                    Ty.Foreground = new SolidColorBrush(Colors.Green);
+                    Ty.Foreground = green;
                 }
-                
                 else {
                     Tx.Foreground = new SolidColorBrush(Colors.White);
                     Ty.Foreground = new SolidColorBrush(Colors.White);
                     Tz.Foreground = new SolidColorBrush(Colors.White);
                     return;
                 }
-
                 if (GameClient.Current.IsConnected()) {
                     await GameClient.Current.ChangeWind(direction);
                 }
@@ -87,7 +88,7 @@ namespace Sensors.App.Views {
             if (_sensor != null) {
                 _sensor.ReportInterval = 0;
                 _sensor.ReadingChanged -= NewRead;
-                _logger.LogMessage("Accelerometer End", LoggingLevel.Information);
+                Logger.LogMessage("Accelerometer End", LoggingLevel.Information);
             }
             Frame.GoBack();
         }
